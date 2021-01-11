@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Reference VS Copy</title>
+</head>
+<body>
+
+  <script>
+    // start with strings, numbers and booleans
+
+    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+
+    // and we want to make a copy of it.
+    const team=players;
+    team[3]='lis';
+    //이것은 그냥 전체 복사 만약 team의 변수가 생기면 player에도 영향이감
+    
+    const team2=players.slice();
+    console.log(team2);
+    //이건 영향이안감 왜냐 복사한거라서
+
+
+    const team3=[].concat(players);
+    team3[3]='asdf';
+    console.log(team3);
+    //console.log(players); 플레이어에는 영향x
+
+    const team4=[...players];
+    team4[3]='asdf';
+    console.log(team4);
+    //console.log(players); 위와동일
+    
+    const team5=Array.from(players);
+    team5[3]='asdf';
+    console.log(team5);
+    //console.log(players); 위와동일
+    
+    const person = {
+        name: 'Wes Bos',
+        age: 80
+    };
+    
+
+    const captain=person;
+    captain.age=99;
+
+
+    const cap2=Object.assign({},person,{number:99});
+    const wes = {
+        name: 'Wes',
+        age: 100,
+        social: {
+            twitter: '@wesbos',
+            facebook: 'wesbos.developer'
+        }
+    };
+
+    console.clear();
+    console.log(wes);
+
+    const dev = Object.assign({}, wes);
+    const dev2 = JSON.parse(JSON.stringify(wes));
+  </script>
+
+</body>
+</html>
